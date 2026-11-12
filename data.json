@@ -13,9 +13,11 @@
       "size": "full",
       "icon": "whatsapp",
       "customIconUrl": "",
-      "title": "No Ryzz REAL!",
+      "title": "No Ryzz Real!",
+      "desc": "Selain ini Fake!",
       "image": "",
-      "url": "https://wa.me/"
+      "thumb": "",
+      "url": "https://wa.me/62895321446723"
     },
     {
       "id": 2,
@@ -24,28 +26,10 @@
       "icon": "tiktok",
       "customIconUrl": "",
       "title": "Tiktok",
+      "desc": "My Tiktok",
       "image": "",
-      "url": "https://tiktok.com/"
-    },
-    {
-      "id": 3,
-      "type": "widget",
-      "size": "2x2",
-      "icon": "instagram",
-      "customIconUrl": "",
-      "title": "Instagram",
-      "image": "",
-      "url": "https://instagram.com/"
-    },
-    {
-      "id": 4,
-      "type": "widget",
-      "size": "2x2",
-      "icon": "telegram",
-      "customIconUrl": "",
-      "title": "Telegram",
-      "image": "",
-      "url": "https://t.me/"
+      "thumb": "",
+      "url": "https://www.tiktok.com/@liryzz_com?_r=1&_t=ZS-9BL7yywsgxV"
     }
   ]
 }
