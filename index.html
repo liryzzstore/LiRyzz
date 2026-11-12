@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links & Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>    
+        #bgContainer {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        #bgContainer img, #bgContainer video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen font-sans pb-16 relative">
+
+    <!-- Container Latar Belakang Dinamis (Warna / Foto / Video) -->
+    <div id="bgContainer"></div>
+
+    <!-- TAMPILAN PUBLIK -->
+    <div id="publicView" class="max-w-[440px] mx-auto pt-10 px-4 relative z-10">
+        <div id="profileHeader" class="text-center mb-6">
+            <img id="displayAvatar" src="" alt="Avatar" class="w-20 h-20 rounded-full mx-auto object-cover border-2 border-white shadow mb-2 hidden">
+            <h1 id="displayName" class="text-lg font-bold text-gray-900 drop-shadow-sm"></h1>
+            <p id="displayBio" class="text-xs text-gray-600 mt-0.5 drop-shadow-sm"></p>
+        </div>
+
+        <div id="publicBlocksContainer" class="space-y-3.5">
+            <div class="text-center py-12 text-gray-500 text-sm">Memuat halaman...</div>
+        </div>
+
+        <div class="text-center mt-10">
+            <span class="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur px-3 py-1.5 rounded-full text-[11px] text-gray-600 shadow-sm border border-white/40">
+                <i class="fas fa-link text-gray-400"></i> Powered by Typelink Clone
+            </span>
+        </div>
+    </div>
+
+    <!-- TAMPILAN ADMIN PANEL -->
+    <div id="adminView" class="hidden max-w-xl mx-auto pt-14 px-4 relative z-20">
+        <div class="bg-white rounded-2xl shadow-lg border p-5 space-y-6">
+            <div class="flex justify-between items-center border-b pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900">Admin Panel (GitHub CMS)</h2>
+                    <p class="text-xs text-gray-500">Kelola konten & latar belakang (Foto/Video)</p>
+                </div>
+                <button onclick="closeAdmin()" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg font-medium">
+                    Tutup / Lihat Halaman
+                </button>
+            </div>
+
+            <!-- Koneksi GitHub -->
+            <div class="bg-blue-50/70 border border-blue-200 rounded-xl p-4 space-y-3">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-blue-800 flex items-center gap-1.5">
+                    <i class="fab fa-github text-sm"></i> Koneksi GitHub
+                </h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-[11px] font-medium text-gray-600">Username GitHub</label>
+                        <input type="text" id="ghOwner" class="w-full mt-1 px-2.5 py-1.5 border rounded-lg text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-gray-600">Nama Repository</label>
+                        <input type="text" id="ghRepo" class="w-full mt-1 px-2.5 py-1.5 border rounded-lg text-xs">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-medium text-gray-600">GitHub Token (PAT)</label>
+                    <input type="password" id="ghToken" placeholder="ghp_..." class="w-full mt-1 px-2.5 py-1.5 border rounded-lg text-xs">
+                </div>
+                <button onclick="saveGitHubConfig()" class="bg-blue-600 text-white text-xs px-3 py-1.5 rounded-lg hover:bg-blue-700 font-medium">
+                    Simpan Koneksi
+                </button>
+            </div>
+
+            <!-- Pengaturan Profil & Background -->
+            <div class="space-y-3 border-b pb-5">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Pengaturan Profil & Latar Belakang</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700">Nama Profil</label>
+                        <input type="text" id="inputName" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700">Bio Singkat</label>
+                        <input type="text" id="inputBio" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700">Foto Profil (Avatar)</label>
+                    <div class="flex gap-2 mt-1">
+                        <input type="text" id="inputAvatar" class="w-full px-3 py-2 border rounded-lg text-xs">
+                        <label class="bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg text-xs cursor-pointer shrink-0 border flex items-center gap-1">
+                            <i class="fas fa-upload"></i> Upload
+                            <input type="file" accept="image/*" class="hidden" onchange="uploadImageToGitHub(this, 'inputAvatar')">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pengaturan Background Baru -->
+                <div class="bg-gray-50 p-3 rounded-xl border space-y-2 mt-3">
+                    <label class="block text-xs font-semibold text-gray-700">Tipe Latar Belakang (Background)</label>
+                    <select id="inputBgType" onchange="toggleBgFields()" class="w-full px-3 py-2 border rounded-lg text-xs bg-white">
+                        <option value="color">Warna Solid / Polos</option>
+                        <option value="image">Foto / Gambar</option>
+                        <option value="video">Video (Looping)</option>
+                    </select>
+
+                    <div id="bgValueContainer">
+                        <label class="block text-xs font-medium text-gray-700 mt-2">Nilai Background (Kode Warna / URL Gambar / URL Video)</label>
+                        <div class="flex gap-2 mt-1">
+                            <input type="text" id="inputBgValue" placeholder="#f4f4f6 atau URL gambar/video" class="w-full px-3 py-2 border rounded-lg text-xs">
+                            <label class="bg-gray-800 text-white hover:bg-gray-700 px-3 py-2 rounded-lg text-xs cursor-pointer shrink-0 flex items-center gap-1">
+                                <i class="fas fa-cloud-upload-alt"></i> Upload Media
+                                <input type="file" accept="image/*,video/*" class="hidden" onchange="uploadBgMediaToGitHub(this)">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tambah Blok Baru -->
+            <div class="bg-gray-50 p-4 rounded-xl border space-y-3">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500">Tambah Konten (Link / Poster Gambar)</h3>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700">Tipe Konten</label>
+                    <select id="blockType" onchange="toggleFormFields()" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs bg-white font-medium">
+                        <option value="banner">Poster / Banner Gambar</option>
+                        <option value="link">Kartu Tautan WhatsApp / Website</option>
+                    </select>
+                </div>
+                <div id="titleField" class="hidden">
+                    <label class="block text-xs font-medium text-gray-700">Teks Tautan</label>
+                    <input type="text" id="blockTitle" placeholder="Judul Tautan" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs">
+                </div>
+                <div id="imageField">
+                    <label class="block text-xs font-medium text-gray-700">Gambar Poster</label>
+                    <div class="flex gap-2 mt-1">
+                        <input type="text" id="blockImage" class="w-full px-3 py-2 border rounded-lg text-xs">
+                        <label class="bg-gray-800 text-white hover:bg-gray-700 px-3 py-2 rounded-lg text-xs cursor-pointer shrink-0 flex items-center gap-1">
+                            <i class="fas fa-upload"></i> Upload
+                            <input type="file" accept="image/*" class="hidden" onchange="uploadImageToGitHub(this, 'blockImage')">
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700">URL Tujuan Saat Diklik (Opsional)</label>
+                    <input type="text" id="blockUrl" placeholder="https://..." class="w-full mt-1 px-3 py-2 border rounded-lg text-xs">
+                </div>
+                <button onclick="addBlock()" class="w-full bg-gray-900 text-white text-xs font-semibold py-2.5 rounded-lg hover:bg-gray-800 transition">
+                    + Masukkan ke Daftar
+                </button>
+            </div>
+
+            <!-- Daftar Blok -->
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Urutan Blok Saat Ini</h3>
+                <div id="adminBlocksList" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
+            </div>
+
+            <!-- Publish -->
+            <div class="pt-3 border-t">
+                <button id="publishBtn" onclick="publishToGitHub()" class="w-full bg-green-600 text-white font-bold text-sm py-3 rounded-xl shadow hover:bg-green-700 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-save"></i> SIMPAN & PUBLISH KE GITHUB
+                </button>
+                <p id="statusMsg" class="text-center text-xs mt-2 text-gray-500"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let appData = { profile: { name: "", bio: "", avatar: "", bgType: "color", bgValue: "#f4f4f6" }, blocks: [] };
+
+        async function loadSiteData() {
+            try {
+                const res = await fetch(`./data.json?t=${Date.now()}`);
+                if (!res.ok) throw new Error("Gagal memuat data");
+                appData = await res.json();
+            } catch (err) {
+                console.warn("Menggunakan data default");
+            }
+            applyBackground();
+            renderPublicView();
+            loadSavedGitHubConfig();
+            checkAdminAccess();
+        }
+
+        function checkAdminAccess() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('admin')) {
+                document.getElementById('adminView').classList.remove('hidden');
+                document.getElementById('publicView').classList.add('hidden');
+                renderAdminPanel();
+            }
+        }
+
+        // Terapkan Background (Warna, Foto, atau Video) ke Halaman Publik
+        function applyBackground() {
+            const bgContainer = document.getElementById('bgContainer');
+            const type = appData.profile.bgType || 'color';
+            const val = appData.profile.bgValue || '#f4f4f6';
+
+            bgContainer.innerHTML = '';
+            if (type === 'color') {
+                document.body.style.backgroundColor = val;
+            } else if (type === 'image') {
+                document.body.style.backgroundColor = '#000';
+                bgContainer.innerHTML = `<img src="${val}" alt="Background">`;
+            } else if (type === 'video') {
+                document.body.style.backgroundColor = '#000';
+                bgContainer.innerHTML = `<video src="${val}" autoplay muted loop playsinline></video>`;
+            }
+        }
+
+        function renderPublicView() {
+            document.getElementById('displayName').innerText = appData.profile.name || '';
+            document.getElementById('displayBio').innerText = appData.profile.bio || '';
+            const avatarEl = document.getElementById('displayAvatar');
+            if (appData.profile.avatar) {
+                avatarEl.src = appData.profile.avatar;
+                avatarEl.classList.remove('hidden');
+            } else {
+                avatarEl.classList.add('hidden');
+            }
+
+            const container = document.getElementById('publicBlocksContainer');
+            container.innerHTML = '';
+
+            if (!appData.blocks || appData.blocks.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-gray-400 text-xs">Belum ada konten.</div>`;
+                return;
+            }
+
+            appData.blocks.forEach(block => {
+                if (block.type === 'link') {
+                    let domain = 'link';
+                    try { domain = new URL(block.url).hostname.replace('www.', ''); } catch(e) {}
+                    const displayTitle = block.title || block.url.replace(/^https?:\/\//, '');
+
+                    container.innerHTML += `
+                        <a href="${block.url}" target="_blank" rel="noopener" class="block glass-card p-4 rounded-2xl shadow-sm border border-white/40 hover:scale-[1.01] transition flex items-center justify-between group">
+                            <div class="flex items-center gap-3.5 overflow-hidden">
+                                <div class="w-11 h-11 rounded-xl bg-green-500/10 text-green-600 flex items-center justify-center text-xl shrink-0 border border-green-200">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div class="truncate">
+                                    <p class="font-semibold text-xs sm:text-sm text-gray-900 truncate group-hover:text-green-600 transition">${displayTitle}</p>
+                                    <p class="text-[11px] text-gray-500 mt-0.5">${domain}</p>
+                                </div>
+                            </div>
+                            <div class="w-7 h-7 rounded-full bg-white/50 flex items-center justify-center text-gray-500 group-hover:text-green-600 transition shrink-0 ml-2">
+                                <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                            </div>
+                        </a>
+                    `;
+                } else if (block.type === 'banner') {
+                    const imgTag = `<img src="${block.image}" alt="Banner" loading="lazy" class="w-full rounded-2xl shadow-sm border border-white/40 object-cover block">`;
+                    if (block.url && block.url.trim() !== '') {
+                        container.innerHTML += `
+                            <a href="${block.url}" target="_blank" rel="noopener" class="block relative group overflow-hidden rounded-2xl">
+                                ${imgTag}
+                                <div class="absolute bottom-3 right-3 bg-black/75 backdrop-blur-sm text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                                    <i class="fas fa-hand-pointer text-xs"></i>
+                                </div>
+                            </a>
+                        `;
+                    } else {
+                        container.innerHTML += `<div class="overflow-hidden rounded-2xl">${imgTag}</div>`;
+                    }
+                }
+            });
+        }
+
+        function renderAdminPanel() {
+            document.getElementById('inputName').value = appData.profile.name || '';
+            document.getElementById('inputBio').value = appData.profile.bio || '';
+            document.getElementById('inputAvatar').value = appData.profile.avatar || '';
+            document.getElementById('inputBgType').value = appData.profile.bgType || 'color';
+            document.getElementById('inputBgValue').value = appData.profile.bgValue || '#f4f4f6';
+
+            const list = document.getElementById('adminBlocksList');
+            list.innerHTML = '';
+            appData.blocks.forEach((block, idx) => {
+                const isBanner = block.type === 'banner';
+                list.innerHTML += `
+                    <div class="flex items-center justify-between bg-gray-50 p-2.5 rounded-xl border text-xs">
+                        <div class="truncate pr-2">
+                            <span class="font-semibold">${isBanner ? '[Gambar]' : '[Link]'} ${block.title || block.url}</span>
+                        </div>
+                        <div class="flex items-center gap-1 shrink-0">
+                            <button onclick="moveBlock(${idx}, -1)" class="p-1 hover:bg-gray-200 rounded"><i class="fas fa-chevron-up"></i></button>
+                            <button onclick="moveBlock(${idx}, 1)" class="p-1 hover:bg-gray-200 rounded"><i class="fas fa-chevron-down"></i></button>
+                            <button onclick="deleteBlock(${block.id})" class="p-1 text-red-600 hover:bg-red-100 rounded"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleBgFields() {
+            // Placeholder text dinamis berdasarkan tipe background yang dipilih
+            const type = document.getElementById('inputBgType').value;
+            const inputVal = document.getElementById('inputBgValue');
+            if(type === 'color') inputVal.placeholder = "Contoh: #f4f4f6 atau rgb(20,20,20)";
+            else if(type === 'image') inputVal.placeholder = "URL Gambar atau Upload Media di samping";
+            else if(type === 'video') inputVal.placeholder = "URL Video (.mp4) atau Upload Media di samping";
+        }
+
+        function toggleFormFields() {
+            const type = document.getElementById('blockType').value;
+            document.getElementById('titleField').classList.toggle('hidden', type === 'banner');
+            document.getElementById('imageField').classList.toggle('hidden', type === 'link');
+        }
+
+        function addBlock() {
+            const type = document.getElementById('blockType').value;
+            const title = document.getElementById('blockTitle').value.trim();
+            const image = document.getElementById('blockImage').value.trim();
+            const url = document.getElementById('blockUrl').value.trim();
+
+            if (type === 'link' && !url) return alert('URL Link wajib diisi!');
+            if (type === 'banner' && !image) return alert('Gambar Banner wajib diisi!');
+
+            appData.blocks.push({ id: Date.now(), type, title: type === 'link' ? (title || url) : '', image: type === 'banner' ? image : '', url });
+            document.getElementById('blockTitle').value = '';
+            document.getElementById('blockImage').value = '';
+            document.getElementById('blockUrl').value = '';
+            renderAdminPanel();
+            renderPublicView();
+        }
+
+        function deleteBlock(id) {
+            appData.blocks = appData.blocks.filter(b => b.id !== id);
+            renderAdminPanel();
+            renderPublicView();
+        }
+
+        function moveBlock(index, dir) {
+            const target = index + dir;
+            if (target < 0 || target >= appData.blocks.length) return;
+            const temp = appData.blocks[index];
+            appData.blocks[index] = appData.blocks[target];
+            appData.blocks[target] = temp;
+            renderAdminPanel();
+            renderPublicView();
+        }
+
+        function saveGitHubConfig() {
+            localStorage.setItem('ghCmsConfig', JSON.stringify({
+                owner: document.getElementById('ghOwner').value.trim(),
+                repo: document.getElementById('ghRepo').value.trim(),
+                token: document.getElementById('ghToken').value.trim()
+            }));
+            alert('Koneksi disimpan!');
+        }
+
+        function loadSavedGitHubConfig() {
+            const saved = JSON.parse(localStorage.getItem('ghCmsConfig'));
+            if (saved) {
+                document.getElementById('ghOwner').value = saved.owner || '';
+                document.getElementById('ghRepo').value = saved.repo || '';
+                document.getElementById('ghToken').value = saved.token || '';
+            } else {
+                const host = window.location.hostname;
+                if (host.endsWith('.github.io')) {
+                    document.getElementById('ghOwner').value = host.split('.')[0];
+                    const parts = window.location.pathname.split('/').filter(Boolean);
+                    if (parts.length > 0) document.getElementById('ghRepo').value = parts[0];
+                }
+            }
+        }
+
+        function utf8ToBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+
+        async function uploadImageToGitHub(fileInput, targetInputId) {
+            uploadMediaGeneric(fileInput, (url) => document.getElementById(targetInputId).value = url);
+        }
+
+        async function uploadBgMediaToGitHub(fileInput) {
+            uploadMediaGeneric(fileInput, (url) => {
+                document.getElementById('inputBgValue').value = url;
+            });
+        }
+
+        async function uploadMediaGeneric(fileInput, callback) {
+            const file = fileInput.files[0];
+            if (!file) return;
+            const owner = document.getElementById('ghOwner').value.trim();
+            const repo = document.getElementById('ghRepo').value.trim();
+            const token = document.getElementById('ghToken').value.trim();
+            if (!owner || !repo || !token) {
+                alert('Lengkapi konfigurasi GitHub di atas dulu!');
+                fileInput.value = '';
+                return;
+            }
+            document.getElementById('statusMsg').innerText = 'Mengupload media...';
+            const reader = new FileReader();
+            reader.onload = async function() {
+                const base64 = reader.result.split(',')[1];
+                const ext = file.name.split('.').pop();
+                const fileName = `uploads/media_${Date.now()}.${ext}`;
+                try {
+                    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`, {
+                        method: 'PUT',
+                        headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: `Upload ${fileName}`, content: base64 })
+                    });
+                    if (!res.ok) throw new Error('Gagal upload');
+                    const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/${fileName}`;
+                    callback(rawUrl);
+                    document.getElementById('statusMsg').innerText = 'Media berhasil diupload!';
+                } catch(err) {
+                    alert('Error: ' + err.message);
+                    document.getElementById('statusMsg').innerText = '';
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function publishToGitHub() {
+            const owner = document.getElementById('ghOwner').value.trim();
+            const repo = document.getElementById('ghRepo').value.trim();
+            const token = document.getElementById('ghToken').value.trim();
+            if (!owner || !repo || !token) return alert('Lengkapi data GitHub!');
+
+            appData.profile.name = document.getElementById('inputName').value.trim();
+            appData.profile.bio = document.getElementById('inputBio').value.trim();
+            appData.profile.avatar = document.getElementById('inputAvatar').value.trim();
+            appData.profile.bgType = document.getElementById('inputBgType').value;
+            appData.profile.bgValue = document.getElementById('inputBgValue').value.trim();
+
+            const btn = document.getElementById('publishBtn');
+            btn.disabled = true;
+            btn.innerText = 'Menyimpan...';
+
+            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/data.json`;
+            try {
+                let sha = null;
+                const getRes = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' } });
+                if (getRes.ok) sha = (await getRes.json()).sha;
+
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: 'Update biolink & background', content: utf8ToBase64(JSON.stringify(appData, null, 2)), sha })
+                });
+                if (!putRes.ok) throw new Error('Gagal menyimpan file data.json');
+
+                applyBackground();
+                renderPublicView();
+                alert('Berhasil dipublish ke GitHub!');
+            } catch(err) {
+                alert('Gagal: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-save"></i> SIMPAN & PUBLISH KE GITHUB';
+            }
+        }
+
+        function closeAdmin() {
+            window.history.replaceState({}, document.title, window.location.pathname);
+            document.getElementById('adminView').classList.add('hidden');
+            document.getElementById('publicView').classList.remove('hidden');
+            applyBackground();
+            renderPublicView();
+        }
+
+        loadSiteData();
+    </script>
+</body>
+</html>
