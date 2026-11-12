@@ -4,7 +4,7 @@
     "bio": "Official Links & Community Channels LiRyzz",
     "avatar": "https://raw.githubusercontent.com/ryzz-adminjb/LiRyzz/main/uploads/media_1794454421133.jpg",
     "bgType": "image",
-    "bgValue": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794464839498.jpg"
+    "bgValue": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794465165907.jpg"
   },
   "blocks": [
     {
@@ -22,17 +22,31 @@
       "url": "https://wa.me/62895321446723"
     },
     {
-      "id": 1794455121423,
+      "id": 1794465020792,
+      "type": "link",
+      "title": "Tiktok",
+      "image": "",
+      "url": "https://www.tiktok.com/@liryzz_com?_r=1&_t=ZS-9BKub2tsyYQ"
+    },
+    {
+      "id": 1794465086135,
       "type": "banner",
       "title": "",
-      "image": "https://raw.githubusercontent.com/ryzz-adminjb/LiRyzz/main/uploads/media_1794455075922.jpg",
+      "image": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794465070430.jpg",
+      "url": ""
+    },
+    {
+      "id": 1794465111212,
+      "type": "link",
+      "title": "Saluran",
+      "image": "",
       "url": "https://whatsapp.com/channel/0029Vb8MSNRD38CUmkWdJI3v"
     },
     {
-      "id": 1794455142974,
-      "type": "banner",
-      "title": "",
-      "image": "https://raw.githubusercontent.com/ryzz-adminjb/LiRyzz/main/uploads/media_1794455131396.jpg",
+      "id": 1794465132286,
+      "type": "link",
+      "title": "Grub",
+      "image": "",
       "url": "https://chat.whatsapp.com/IhelDsFWlJBCtfoImJLT3e?s=cl&p=a&iam=2"
     }
   ]
