@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "name": "LiRyzz",
+    "bio": "Official Links & Community Channels LiRyzz",
+    "avatar": "https://raw.githubusercontent.com/ryzz-adminjb/LiRyzz/main/uploads/media_1794454421133.jpg",
+    "bgType": "color",
+    "bgValue": "https://raw.githubusercontent.com/ryzz-adminjb/LiRyzz/main/uploads/media_1794455158927.jpg"
+  },
+  "blocks": [
+    {
+      "id": 1794454679172,
+      "type": "banner",
+      "title": "",
+      "image": "https://raw.githubusercontent.com/ryzz-adminjb/LiRyzz/main/uploads/media_1794454640624.jpg",
+      "url": ""
+    },
+    {
+      "id": 1794455063122,
+      "type": "link",
+      "title": "No Ryzz REAL!",
+      "image": "",
+      "url": "https://wa.me/62895321446723"
+    },
+    {
+      "id": 1794455121423,
+      "type": "banner",
+      "title": "",
+      "image": "https://raw.githubusercontent.com/ryzz-adminjb/LiRyzz/main/uploads/media_1794455075922.jpg",
+      "url": "https://whatsapp.com/channel/0029Vb8MSNRD38CUmkWdJI3v"
+    },
+    {
+      "id": 1794455142974,
+      "type": "banner",
+      "title": "",
+      "image": "https://raw.githubusercontent.com/ryzz-adminjb/LiRyzz/main/uploads/media_1794455131396.jpg",
+      "url": "https://chat.whatsapp.com/IhelDsFWlJBCtfoImJLT3e?s=cl&p=a&iam=2"
+    }
+  ]
+}
