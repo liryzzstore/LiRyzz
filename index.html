@@ -6,7 +6,7 @@
     <title>Links & Community</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>    
+    <style>
         #bgContainer {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -18,43 +18,62 @@
             object-fit: cover;
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(25, 25, 30, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
+        /* Sistem Grid Bento 4 Kolom */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .size-full { grid-column: span 4 / span 4; }
+        .size-2x2 { grid-column: span 2 / span 2; aspect-ratio: 1 / 1; }
+        .size-2x3 { grid-column: span 2 / span 2; aspect-ratio: 2 / 3; }
+        .size-3x2 { grid-column: span 4 / span 4; min-height: 175px; }
+        .size-3x3 { grid-column: span 4 / span 4; aspect-ratio: 1 / 1; }
+        .size-4x4 { grid-column: span 4 / span 4; aspect-ratio: 1 / 1; }
     </style>
 </head>
-<body class="text-gray-800 min-h-screen font-sans pb-16 relative">
+<body class="text-gray-100 min-h-screen font-sans pb-16 relative bg-[#0f0f12]">
 
-    <!-- Container Latar Belakang Dinamis (Warna / Foto / Video) -->
+    <!-- Latar Belakang Dinamis -->
     <div id="bgContainer"></div>
 
-    <!-- TAMPILAN PUBLIK -->
-    <div id="publicView" class="max-w-[440px] mx-auto pt-10 px-4 relative z-10">
-        <div id="profileHeader" class="text-center mb-6">
-            <img id="displayAvatar" src="" alt="Avatar" class="w-20 h-20 rounded-full mx-auto object-cover border-2 border-white shadow mb-2 hidden">
-            <h1 id="displayName" class="text-lg font-bold text-gray-900 drop-shadow-sm"></h1>
-            <p id="displayBio" class="text-xs text-gray-600 mt-0.5 drop-shadow-sm"></p>
+    <!-- ========================================== -->
+    <!-- 1. TAMPILAN PUBLIK                         -->
+    <!-- ========================================== -->
+    <div id="publicView" class="max-w-[440px] mx-auto pt-8 px-3.5 relative z-10">
+        <!-- Header Profil -->
+        <div id="profileHeader" class="text-center mb-5">
+            <img id="displayAvatar" src="" alt="Avatar" class="w-20 h-20 rounded-full mx-auto object-cover border-2 border-white/80 shadow-lg mb-2 hidden">
+            <h1 id="displayName" class="text-lg font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"></h1>
+            <p id="displayBio" class="text-xs text-gray-200 mt-0.5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]"></p>
         </div>
 
-        <div id="publicBlocksContainer" class="space-y-3.5">
-            <div class="text-center py-12 text-gray-500 text-sm">Memuat halaman...</div>
+        <!-- Container Blok (Bento Grid 4 Kolom) -->
+        <div id="publicBlocksContainer" class="bento-grid">
+            <div class="size-full text-center py-12 text-gray-400 text-sm">Memuat halaman...</div>
         </div>
 
+        <!-- Footer -->
         <div class="text-center mt-10">
-            <span class="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur px-3 py-1.5 rounded-full text-[11px] text-gray-600 shadow-sm border border-white/40">
-                <i class="fas fa-link text-gray-400"></i> Powered by Typelink Clone
+            <span class="inline-flex items-center gap-1.5 bg-black/50 backdrop-blur px-3.5 py-1.5 rounded-full text-[11px] text-gray-300 shadow border border-white/10">
+                <i class="fas fa-link text-gray-400"></i> Powered by Custom BioLink
             </span>
         </div>
     </div>
 
-    <!-- TAMPILAN ADMIN PANEL -->
-    <div id="adminView" class="hidden max-w-xl mx-auto pt-14 px-4 relative z-20">
-        <div class="bg-white rounded-2xl shadow-lg border p-5 space-y-6">
+    <!-- ========================================== -->
+    <!-- 2. TAMPILAN ADMIN PANEL                    -->
+    <!-- ========================================== -->
+    <div id="adminView" class="hidden max-w-xl mx-auto pt-8 px-4 relative z-20 text-gray-800">
+        <div class="bg-white rounded-2xl shadow-2xl border p-5 space-y-6">
             <div class="flex justify-between items-center border-b pb-3">
                 <div>
                     <h2 class="text-lg font-bold text-gray-900">Admin Panel (GitHub CMS)</h2>
-                    <p class="text-xs text-gray-500">Kelola konten & latar belakang (Foto/Video)</p>
+                    <p class="text-xs text-gray-500">Mendukung Keterangan Grid, Thumbnail Kanan & Auto-Clean</p>
                 </div>
                 <button onclick="closeAdmin()" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-lg font-medium">
                     Tutup / Lihat Halaman
@@ -69,11 +88,11 @@
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block text-[11px] font-medium text-gray-600">Username GitHub</label>
-                        <input type="text" id="ghOwner" class="w-full mt-1 px-2.5 py-1.5 border rounded-lg text-xs">
+                        <input type="text" id="ghOwner" placeholder="Ryzz-adminJB" class="w-full mt-1 px-2.5 py-1.5 border rounded-lg text-xs">
                     </div>
                     <div>
                         <label class="block text-[11px] font-medium text-gray-600">Nama Repository</label>
-                        <input type="text" id="ghRepo" class="w-full mt-1 px-2.5 py-1.5 border rounded-lg text-xs">
+                        <input type="text" id="ghRepo" placeholder="LiRyzz" class="w-full mt-1 px-2.5 py-1.5 border rounded-lg text-xs">
                     </div>
                 </div>
                 <div>
@@ -81,16 +100,16 @@
                     <input type="password" id="ghToken" placeholder="ghp_..." class="w-full mt-1 px-2.5 py-1.5 border rounded-lg text-xs">
                 </div>
                 <button onclick="saveGitHubConfig()" class="bg-blue-600 text-white text-xs px-3 py-1.5 rounded-lg hover:bg-blue-700 font-medium">
-                    Simpan Koneksi
+                    Simpan Koneksi di Browser
                 </button>
             </div>
 
-            <!-- Pengaturan Profil & Background -->
+            <!-- Pengaturan Profil & Background Utama -->
             <div class="space-y-3 border-b pb-5">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Pengaturan Profil & Latar Belakang</h3>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Pengaturan Header & Background Website</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-medium text-gray-700">Nama Profil</label>
+                        <label class="block text-xs font-medium text-gray-700">Nama Header (Kosongkan jika tanpa nama)</label>
                         <input type="text" id="inputName" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs">
                     </div>
                     <div>
@@ -101,79 +120,145 @@
                 <div>
                     <label class="block text-xs font-medium text-gray-700">Foto Profil (Avatar)</label>
                     <div class="flex gap-2 mt-1">
-                        <input type="text" id="inputAvatar" class="w-full px-3 py-2 border rounded-lg text-xs">
+                        <input type="text" id="inputAvatar" placeholder="Kosongkan jika tanpa avatar" class="w-full px-3 py-2 border rounded-lg text-xs">
                         <label class="bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg text-xs cursor-pointer shrink-0 border flex items-center gap-1">
                             <i class="fas fa-upload"></i> Upload
-                            <input type="file" accept="image/*" class="hidden" onchange="uploadImageToGitHub(this, 'inputAvatar')">
+                            <input type="file" accept="image/*" class="hidden" onchange="uploadMediaGeneric(this, 'inputAvatar')">
                         </label>
                     </div>
                 </div>
 
-                <!-- Pengaturan Background Baru -->
+                <!-- Latar Belakang Website -->
                 <div class="bg-gray-50 p-3 rounded-xl border space-y-2 mt-3">
-                    <label class="block text-xs font-semibold text-gray-700">Tipe Latar Belakang (Background)</label>
-                    <select id="inputBgType" onchange="toggleBgFields()" class="w-full px-3 py-2 border rounded-lg text-xs bg-white">
-                        <option value="color">Warna Solid / Polos</option>
+                    <label class="block text-xs font-semibold text-gray-700">Latar Belakang (Background Website)</label>
+                    <select id="inputBgType" class="w-full px-3 py-2 border rounded-lg text-xs bg-white">
+                        <option value="color">Warna Solid (Contoh: #0f0f12)</option>
                         <option value="image">Foto / Gambar</option>
-                        <option value="video">Video (Looping)</option>
+                        <option value="video">Video (MP4 Looping)</option>
                     </select>
-
-                    <div id="bgValueContainer">
-                        <label class="block text-xs font-medium text-gray-700 mt-2">Nilai Background (Kode Warna / URL Gambar / URL Video)</label>
-                        <div class="flex gap-2 mt-1">
-                            <input type="text" id="inputBgValue" placeholder="#f4f4f6 atau URL gambar/video" class="w-full px-3 py-2 border rounded-lg text-xs">
-                            <label class="bg-gray-800 text-white hover:bg-gray-700 px-3 py-2 rounded-lg text-xs cursor-pointer shrink-0 flex items-center gap-1">
-                                <i class="fas fa-cloud-upload-alt"></i> Upload Media
-                                <input type="file" accept="image/*,video/*" class="hidden" onchange="uploadBgMediaToGitHub(this)">
-                            </label>
-                        </div>
+                    <div class="flex gap-2 mt-1">
+                        <input type="text" id="inputBgValue" placeholder="#0f0f12 atau URL foto/video" class="w-full px-3 py-2 border rounded-lg text-xs">
+                        <label class="bg-gray-800 text-white hover:bg-gray-700 px-3 py-2 rounded-lg text-xs cursor-pointer shrink-0 flex items-center gap-1">
+                            <i class="fas fa-cloud-upload-alt"></i> Upload BG
+                            <input type="file" accept="image/*,video/*" class="hidden" onchange="uploadMediaGeneric(this, 'inputBgValue')">
+                        </label>
                     </div>
                 </div>
             </div>
 
-            <!-- Tambah Blok Baru -->
-            <div class="bg-gray-50 p-4 rounded-xl border space-y-3">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500">Tambah Konten (Link / Poster Gambar)</h3>
-                <div>
-                    <label class="block text-xs font-medium text-gray-700">Tipe Konten</label>
-                    <select id="blockType" onchange="toggleFormFields()" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs bg-white font-medium">
-                        <option value="banner">Poster / Banner Gambar</option>
-                        <option value="link">Kartu Tautan WhatsApp / Website</option>
+            <!-- Form Tambah / Edit Konten Grid -->
+            <div class="bg-gray-50 p-4 rounded-xl border space-y-3" id="formContainer">
+                <div class="flex justify-between items-center">
+                    <h3 id="formHeading" class="text-xs font-bold uppercase tracking-wider text-gray-600">Tambah Konten / Grid Baru</h3>
+                    <button id="cancelEditBtn" onclick="resetBlockForm()" class="hidden text-xs text-red-600 hover:underline font-medium">Batal Edit</button>
+                </div>
+                <input type="hidden" id="editingBlockId" value="">
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700">Tipe Konten</label>
+                        <select id="blockType" onchange="toggleFormFields()" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs bg-white font-medium">
+                            <option value="widget">Kartu / Widget Grid (Bisa Teks + Foto Kanan)</option>
+                            <option value="banner">Poster / Gambar Banner Murni (Bisa + Keterangan)</option>
+                            <option value="link">Baris Link Simpel</option>
+                        </select>
+                    </div>
+
+                    <div id="sizeField">
+                        <label class="block text-xs font-medium text-gray-700">Ukuran Grid</label>
+                        <select id="blockSize" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs bg-white font-medium">
+                            <option value="3x2">Grid 3x2 (Kartu Lebar seperti Testimoni/Stok)</option>
+                            <option value="2x2">Grid 2x2 (Setengah Lebar - Kiri/Kanan)</option>
+                            <option value="2x3">Grid 2x3 (Setengah Lebar - Vertikal)</option>
+                            <option value="full">Lebar Penuh (Standar / Banner)</option>
+                            <option value="3x3">Grid 3x3 (Kotak Besar)</option>
+                            <option value="4x4">Grid 4x4 (Kotak Penuh)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Pilihan Ikon -->
+                <div id="iconField" class="space-y-2">
+                    <label class="block text-xs font-medium text-gray-700">Ikon Pojok Kiri Atas</label>
+                    <select id="blockIcon" onchange="toggleCustomIconField()" class="w-full px-3 py-2 border rounded-lg text-xs bg-white font-medium">
+                        <option value="auto">Otomatis Sesuai Link (WA / TikTok / IG / dll)</option>
+                        <option value="whatsapp">WhatsApp (Hijau)</option>
+                        <option value="tiktok">TikTok</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="youtube">YouTube</option>
+                        <option value="telegram">Telegram</option>
+                        <option value="discord">Discord</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="globe">Website Umum (Globe)</option>
+                        <option value="none">Tanpa Ikon</option>
+                        <option value="custom">Upload Gambar Ikon Sendiri</option>
                     </select>
-                </div>
-                <div id="titleField" class="hidden">
-                    <label class="block text-xs font-medium text-gray-700">Teks Tautan</label>
-                    <input type="text" id="blockTitle" placeholder="Judul Tautan" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs">
-                </div>
-                <div id="imageField">
-                    <label class="block text-xs font-medium text-gray-700">Gambar Poster</label>
-                    <div class="flex gap-2 mt-1">
-                        <input type="text" id="blockImage" class="w-full px-3 py-2 border rounded-lg text-xs">
+
+                    <div id="customIconUpload" class="hidden flex gap-2">
+                        <input type="text" id="blockCustomIconUrl" placeholder="URL Gambar Ikon Kustom" class="w-full px-3 py-2 border rounded-lg text-xs bg-white">
                         <label class="bg-gray-800 text-white hover:bg-gray-700 px-3 py-2 rounded-lg text-xs cursor-pointer shrink-0 flex items-center gap-1">
-                            <i class="fas fa-upload"></i> Upload
-                            <input type="file" accept="image/*" class="hidden" onchange="uploadImageToGitHub(this, 'blockImage')">
+                            <i class="fas fa-upload"></i> Upload Ikon
+                            <input type="file" accept="image/*" class="hidden" onchange="uploadMediaGeneric(this, 'blockCustomIconUrl')">
                         </label>
                     </div>
                 </div>
-                <div>
-                    <label class="block text-xs font-medium text-gray-700">URL Tujuan Saat Diklik (Opsional)</label>
-                    <input type="text" id="blockUrl" placeholder="https://..." class="w-full mt-1 px-3 py-2 border rounded-lg text-xs">
+
+                <!-- Judul & Keterangan (Subtitle) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700">Judul Utama (Opsional di Banner)</label>
+                        <input type="text" id="blockTitle" placeholder="Contoh: TESTIMONI || VIVY FLAURITE" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700">Keterangan / Teks Bawah</label>
+                        <input type="text" id="blockDesc" placeholder="Contoh: whatsapp.com atau Klik untuk order" class="w-full mt-1 px-3 py-2 border rounded-lg text-xs">
+                    </div>
                 </div>
-                <button onclick="addBlock()" class="w-full bg-gray-900 text-white text-xs font-semibold py-2.5 rounded-lg hover:bg-gray-800 transition">
-                    + Masukkan ke Daftar
+
+                <!-- Gambar Latar Kartu / Banner -->
+                <div id="imageField">
+                    <label class="block text-xs font-medium text-gray-700">Gambar Background Grid / Poster Banner</label>
+                    <div class="flex gap-2 mt-1">
+                        <input type="text" id="blockImage" placeholder="URL Gambar Background / Banner ->" class="w-full px-3 py-2 border rounded-lg text-xs">
+                        <label class="bg-gray-800 text-white hover:bg-gray-700 px-3 py-2 rounded-lg text-xs cursor-pointer shrink-0 flex items-center gap-1">
+                            <i class="fas fa-upload"></i> Upload Gambar
+                            <input type="file" accept="image/*" class="hidden" onchange="uploadMediaGeneric(this, 'blockImage')">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Gambar Thumbnail Kanan (Seperti Foto Anime di Kanan Kartu WA) -->
+                <div id="thumbField">
+                    <label class="block text-xs font-medium text-gray-700">Foto Kotak Kecil di Sebelah Kanan (Opsional - Seperti Referensi)</label>
+                    <div class="flex gap-2 mt-1">
+                        <input type="text" id="blockThumb" placeholder="Kosongkan jika tidak pakai foto kecil di kanan" class="w-full px-3 py-2 border rounded-lg text-xs">
+                        <label class="bg-purple-700 text-white hover:bg-purple-800 px-3 py-2 rounded-lg text-xs cursor-pointer shrink-0 flex items-center gap-1">
+                            <i class="fas fa-upload"></i> Upload Foto Kanan
+                            <input type="file" accept="image/*" class="hidden" onchange="uploadMediaGeneric(this, 'blockThumb')">
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-700">URL Tujuan Saat Diklik (Kosongkan jika hanya gambar pajangan)</label>
+                    <input type="text" id="blockUrl" placeholder="https://whatsapp.com/channel/..." class="w-full mt-1 px-3 py-2 border rounded-lg text-xs">
+                </div>
+
+                <button id="saveBlockBtn" onclick="saveBlockItem()" class="w-full bg-gray-900 text-white text-xs font-semibold py-2.5 rounded-lg hover:bg-gray-800 transition">
+                    + Masukkan ke Daftar Grid
                 </button>
             </div>
 
             <!-- Daftar Blok -->
             <div>
-                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Urutan Blok Saat Ini</h3>
-                <div id="adminBlocksList" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Urutan Konten Saat Ini (Klik Pensil untuk Edit)</h3>
+                <div id="adminBlocksList" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
             </div>
 
-            <!-- Publish -->
+            <!-- Tombol Publish + Auto Clean -->
             <div class="pt-3 border-t">
                 <button id="publishBtn" onclick="publishToGitHub()" class="w-full bg-green-600 text-white font-bold text-sm py-3 rounded-xl shadow hover:bg-green-700 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-save"></i> SIMPAN & PUBLISH KE GITHUB
+                    <i class="fas fa-save"></i> SIMPAN & PUBLISH KE GITHUB (AUTO-CLEAN)
                 </button>
                 <p id="statusMsg" class="text-center text-xs mt-2 text-gray-500"></p>
             </div>
@@ -181,12 +266,15 @@
     </div>
 
     <script>
-        let appData = { profile: { name: "", bio: "", avatar: "", bgType: "color", bgValue: "#f4f4f6" }, blocks: [] };
+        let appData = {
+            profile: { name: "", bio: "", avatar: "", bgType: "color", bgValue: "#0f0f12" },
+            blocks: []
+        };
 
         async function loadSiteData() {
             try {
                 const res = await fetch(`./data.json?t=${Date.now()}`);
-                if (!res.ok) throw new Error("Gagal memuat data");
+                if (!res.ok) throw new Error("Gagal memuat data.json");
                 appData = await res.json();
             } catch (err) {
                 console.warn("Menggunakan data default");
@@ -206,11 +294,10 @@
             }
         }
 
-        // Terapkan Background (Warna, Foto, atau Video) ke Halaman Publik
         function applyBackground() {
             const bgContainer = document.getElementById('bgContainer');
             const type = appData.profile.bgType || 'color';
-            const val = appData.profile.bgValue || '#f4f4f6';
+            const val = appData.profile.bgValue || '#0f0f12';
 
             bgContainer.innerHTML = '';
             if (type === 'color') {
@@ -222,6 +309,54 @@
                 document.body.style.backgroundColor = '#000';
                 bgContainer.innerHTML = `<video src="${val}" autoplay muted loop playsinline></video>`;
             }
+        }
+
+        // Deteksi Ikon Sesuai Link atau Pilihan
+        function resolveIconDetails(block) {
+            if (block.icon === 'none') return { isNone: true };
+            if (block.icon === 'custom' && block.customIconUrl) {
+                return { isCustomImg: true, imgUrl: block.customIconUrl };
+            }
+
+            let key = block.icon || 'auto';
+            const urlLower = (block.url || '').toLowerCase();
+
+            if (key === 'auto') {
+                if (urlLower.includes('wa.me') || urlLower.includes('whatsapp.com')) key = 'whatsapp';
+                else if (urlLower.includes('tiktok.com')) key = 'tiktok';
+                else if (urlLower.includes('instagram.com')) key = 'instagram';
+                else if (urlLower.includes('youtube.com') || urlLower.includes('youtu.be')) key = 'youtube';
+                else if (urlLower.includes('t.me') || urlLower.includes('telegram')) key = 'telegram';
+                else if (urlLower.includes('discord')) key = 'discord';
+                else if (urlLower.includes('facebook.com') || urlLower.includes('fb.')) key = 'facebook';
+                else key = 'globe';
+            }
+
+            const map = {
+                whatsapp: { icon: 'fab fa-whatsapp', style: 'text-[#25D366] bg-[#112217]/90 border-[#25D366]/60' },
+                tiktok: { icon: 'fab fa-tiktok', style: 'text-white bg-black/80 border-gray-500/50' },
+                instagram: { icon: 'fab fa-instagram', style: 'text-pink-400 bg-pink-950/80 border-pink-400/50' },
+                youtube: { icon: 'fab fa-youtube', style: 'text-red-500 bg-red-950/80 border-red-500/50' },
+                telegram: { icon: 'fab fa-telegram-plane', style: 'text-sky-400 bg-sky-950/80 border-sky-400/50' },
+                discord: { icon: 'fab fa-discord', style: 'text-indigo-400 bg-indigo-950/80 border-indigo-400/50' },
+                facebook: { icon: 'fab fa-facebook-f', style: 'text-blue-400 bg-blue-950/80 border-blue-400/50' },
+                globe: { icon: 'fas fa-globe', style: 'text-gray-200 bg-gray-800/80 border-gray-600' }
+            };
+
+            return map[key] || map.globe;
+        }
+
+        function renderIconBadge(block) {
+            const info = resolveIconDetails(block);
+            if (info.isNone) return '';
+            if (info.isCustomImg) {
+                return `<img src="${info.imgUrl}" class="w-12 h-12 rounded-2xl object-cover border border-white/20 shrink-0 shadow-md">`;
+            }
+            return `
+                <div class="w-12 h-12 rounded-2xl ${info.style} flex items-center justify-center text-2xl shrink-0 border-2 shadow-md">
+                    <i class="${info.icon}"></i>
+                </div>
+            `;
         }
 
         function renderPublicView() {
@@ -239,46 +374,77 @@
             container.innerHTML = '';
 
             if (!appData.blocks || appData.blocks.length === 0) {
-                container.innerHTML = `<div class="text-center py-8 text-gray-400 text-xs">Belum ada konten.</div>`;
+                container.innerHTML = `<div class="size-full text-center py-8 text-gray-400 text-xs">Belum ada konten.</div>`;
                 return;
             }
 
             appData.blocks.forEach(block => {
+                let domain = '';
+                try { if (block.url) domain = new URL(block.url).hostname.replace('www.', ''); } catch(e) {}
+                
+                const displayTitle = block.title || '';
+                // Gunakan keterangan (desc) jika diisi, jika kosong gunakan nama domain seperti whatsapp.com
+                const displaySubtitle = (block.desc && block.desc.trim() !== '') ? block.desc : domain;
+                const sizeClass = `size-${block.size || (block.type === 'widget' ? '3x2' : 'full')}`;
+                const iconHtml = renderIconBadge(block);
+                const wrapperTag = block.url ? `a href="${block.url}" target="_blank" rel="noopener"` : `div`;
+
                 if (block.type === 'link') {
-                    let domain = 'link';
-                    try { domain = new URL(block.url).hostname.replace('www.', ''); } catch(e) {}
-                    const displayTitle = block.title || block.url.replace(/^https?:\/\//, '');
+                    container.innerHTML += `
+                        <${wrapperTag} class="${sizeClass} glass-card p-3.5 rounded-[26px] shadow-md border border-white/15 hover:scale-[1.01] transition flex items-center justify-between group">
+                            <div class="flex items-center gap-3.5 overflow-hidden">
+                                ${iconHtml}
+                                <div class="truncate">
+                                    <p class="font-bold text-xs sm:text-sm text-white truncate">${displayTitle || domain}</p>
+                                    ${displaySubtitle ? `<p class="text-[11px] text-gray-300 mt-0.5 truncate">${displaySubtitle}</p>` : ''}
+                                </div>
+                            </div>
+                            ${block.url ? `
+                            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-300 group-hover:bg-white group-hover:text-black transition shrink-0 ml-2">
+                                <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                            </div>` : ''}
+                        </${block.url ? 'a' : 'div'}>
+                    `;
+                } else if (block.type === 'widget') {
+                    const bgStyle = block.image ? `style="background-image: url('${block.image}'); background-size: cover; background-position: center;"` : '';
+                    const hasThumb = block.thumb && block.thumb.trim() !== '';
 
                     container.innerHTML += `
-                        <a href="${block.url}" target="_blank" rel="noopener" class="block glass-card p-4 rounded-2xl shadow-sm border border-white/40 hover:scale-[1.01] transition flex items-center justify-between group">
-                            <div class="flex items-center gap-3.5 overflow-hidden">
-                                <div class="w-11 h-11 rounded-xl bg-green-500/10 text-green-600 flex items-center justify-center text-xl shrink-0 border border-green-200">
-                                    <i class="fab fa-whatsapp"></i>
-                                </div>
-                                <div class="truncate">
-                                    <p class="font-semibold text-xs sm:text-sm text-gray-900 truncate group-hover:text-green-600 transition">${displayTitle}</p>
-                                    <p class="text-[11px] text-gray-500 mt-0.5">${domain}</p>
+                        <${wrapperTag} ${bgStyle} class="${sizeClass} glass-card p-4 sm:p-5 rounded-[28px] shadow-lg border border-white/15 hover:scale-[1.01] transition relative overflow-hidden flex items-center justify-between gap-3 group">
+                            ${block.image ? `<div class="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/30 pointer-events-none"></div>` : ''}
+                            
+                            <!-- Sisi Kiri: Ikon + Judul + Keterangan -->
+                            <div class="relative z-10 flex flex-col justify-between h-full flex-1 min-w-0 space-y-2.5">
+                                <div>${iconHtml}</div>
+                                <div>
+                                    ${displayTitle ? `<h3 class="font-extrabold text-sm sm:text-[15px] text-white leading-snug uppercase tracking-wide drop-shadow">${displayTitle}</h3>` : ''}
+                                    ${displaySubtitle ? `<p class="text-xs sm:text-[13px] text-gray-200 mt-1 font-medium drop-shadow">${displaySubtitle}</p>` : ''}
                                 </div>
                             </div>
-                            <div class="w-7 h-7 rounded-full bg-white/50 flex items-center justify-center text-gray-500 group-hover:text-green-600 transition shrink-0 ml-2">
-                                <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+
+                            <!-- Sisi Kanan: Foto Thumbnail Kotak (Persis Contoh Referensi) -->
+                            ${hasThumb ? `
+                            <div class="relative z-10 shrink-0">
+                                <img src="${block.thumb}" alt="Thumbnail" class="w-28 h-28 sm:w-32 sm:h-32 rounded-[22px] object-cover shadow-xl border border-white/20">
                             </div>
-                        </a>
+                            ` : ''}
+                        </${block.url ? 'a' : 'div'}>
                     `;
                 } else if (block.type === 'banner') {
-                    const imgTag = `<img src="${block.image}" alt="Banner" loading="lazy" class="w-full rounded-2xl shadow-sm border border-white/40 object-cover block">`;
-                    if (block.url && block.url.trim() !== '') {
-                        container.innerHTML += `
-                            <a href="${block.url}" target="_blank" rel="noopener" class="block relative group overflow-hidden rounded-2xl">
-                                ${imgTag}
-                                <div class="absolute bottom-3 right-3 bg-black/75 backdrop-blur-sm text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition">
-                                    <i class="fas fa-hand-pointer text-xs"></i>
-                                </div>
-                            </a>
-                        `;
-                    } else {
-                        container.innerHTML += `<div class="overflow-hidden rounded-2xl">${imgTag}</div>`;
-                    }
+                    const bSize = block.size && block.size !== 'full' ? `size-${block.size}` : 'size-full';
+                    const hasCaption = displayTitle || displaySubtitle;
+
+                    container.innerHTML += `
+                        <${wrapperTag} class="${bSize} block relative group overflow-hidden rounded-[26px] shadow-lg border border-white/15">
+                            <img src="${block.image}" alt="Banner" loading="lazy" class="w-full h-full object-cover block">
+                            ${hasCaption ? `
+                            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3.5 pt-8">
+                                ${displayTitle ? `<p class="font-extrabold text-xs sm:text-sm text-white uppercase tracking-wide drop-shadow">${displayTitle}</p>` : ''}
+                                ${displaySubtitle ? `<p class="text-[11px] text-gray-200 mt-0.5 drop-shadow">${displaySubtitle}</p>` : ''}
+                            </div>
+                            ` : ''}
+                        </${block.url ? 'a' : 'div'}>
+                    `;
                 }
             });
         }
@@ -288,55 +454,108 @@
             document.getElementById('inputBio').value = appData.profile.bio || '';
             document.getElementById('inputAvatar').value = appData.profile.avatar || '';
             document.getElementById('inputBgType').value = appData.profile.bgType || 'color';
-            document.getElementById('inputBgValue').value = appData.profile.bgValue || '#f4f4f6';
+            document.getElementById('inputBgValue').value = appData.profile.bgValue || '#0f0f12';
 
             const list = document.getElementById('adminBlocksList');
             list.innerHTML = '';
             appData.blocks.forEach((block, idx) => {
-                const isBanner = block.type === 'banner';
+                const sizeLabel = block.size || 'full';
+                const titleText = block.title || block.desc || block.url || 'Gambar Banner';
+                const label = `[${block.type.toUpperCase()} ${sizeLabel}] ${titleText}`;
                 list.innerHTML += `
                     <div class="flex items-center justify-between bg-gray-50 p-2.5 rounded-xl border text-xs">
                         <div class="truncate pr-2">
-                            <span class="font-semibold">${isBanner ? '[Gambar]' : '[Link]'} ${block.title || block.url}</span>
+                            <span class="font-semibold text-gray-800">${label}</span>
+                            ${block.desc ? `<p class="text-[11px] text-gray-500 truncate">Ket: ${block.desc}</p>` : ''}
                         </div>
                         <div class="flex items-center gap-1 shrink-0">
-                            <button onclick="moveBlock(${idx}, -1)" class="p-1 hover:bg-gray-200 rounded"><i class="fas fa-chevron-up"></i></button>
-                            <button onclick="moveBlock(${idx}, 1)" class="p-1 hover:bg-gray-200 rounded"><i class="fas fa-chevron-down"></i></button>
-                            <button onclick="deleteBlock(${block.id})" class="p-1 text-red-600 hover:bg-red-100 rounded"><i class="fas fa-trash"></i></button>
+                            <button onclick="editBlockItem(${block.id})" class="p-1.5 text-blue-600 hover:bg-blue-100 rounded" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button onclick="moveBlock(${idx}, -1)" class="p-1.5 hover:bg-gray-200 rounded" title="Naik"><i class="fas fa-chevron-up"></i></button>
+                            <button onclick="moveBlock(${idx}, 1)" class="p-1.5 hover:bg-gray-200 rounded" title="Turun"><i class="fas fa-chevron-down"></i></button>
+                            <button onclick="deleteBlock(${block.id})" class="p-1.5 text-red-600 hover:bg-red-100 rounded" title="Hapus"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
                 `;
             });
-        }
-
-        function toggleBgFields() {
-            // Placeholder text dinamis berdasarkan tipe background yang dipilih
-            const type = document.getElementById('inputBgType').value;
-            const inputVal = document.getElementById('inputBgValue');
-            if(type === 'color') inputVal.placeholder = "Contoh: #f4f4f6 atau rgb(20,20,20)";
-            else if(type === 'image') inputVal.placeholder = "URL Gambar atau Upload Media di samping";
-            else if(type === 'video') inputVal.placeholder = "URL Video (.mp4) atau Upload Media di samping";
+            toggleFormFields();
         }
 
         function toggleFormFields() {
             const type = document.getElementById('blockType').value;
-            document.getElementById('titleField').classList.toggle('hidden', type === 'banner');
+            document.getElementById('iconField').classList.toggle('hidden', type === 'banner');
             document.getElementById('imageField').classList.toggle('hidden', type === 'link');
+            document.getElementById('thumbField').classList.toggle('hidden', type !== 'widget');
         }
 
-        function addBlock() {
+        function toggleCustomIconField() {
+            const iconVal = document.getElementById('blockIcon').value;
+            document.getElementById('customIconUpload').classList.toggle('hidden', iconVal !== 'custom');
+        }
+
+        function editBlockItem(id) {
+            const block = appData.blocks.find(b => b.id === id);
+            if (!block) return;
+
+            document.getElementById('editingBlockId').value = block.id;
+            document.getElementById('blockType').value = block.type || 'widget';
+            document.getElementById('blockSize').value = block.size || '3x2';
+            document.getElementById('blockIcon').value = block.icon || 'auto';
+            document.getElementById('blockCustomIconUrl').value = block.customIconUrl || '';
+            document.getElementById('blockTitle').value = block.title || '';
+            document.getElementById('blockDesc').value = block.desc || '';
+            document.getElementById('blockImage').value = block.image || '';
+            document.getElementById('blockThumb').value = block.thumb || '';
+            document.getElementById('blockUrl').value = block.url || '';
+
+            toggleFormFields();
+            toggleCustomIconField();
+
+            document.getElementById('formHeading').innerText = 'Edit Konten / Grid';
+            document.getElementById('saveBlockBtn').innerText = 'Simpan Perubahan Item Ini';
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+            document.getElementById('formContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetBlockForm() {
+            document.getElementById('editingBlockId').value = '';
+            document.getElementById('blockTitle').value = '';
+            document.getElementById('blockDesc').value = '';
+            document.getElementById('blockImage').value = '';
+            document.getElementById('blockThumb').value = '';
+            document.getElementById('blockUrl').value = '';
+            document.getElementById('blockCustomIconUrl').value = '';
+            document.getElementById('formHeading').innerText = 'Tambah Konten / Grid Baru';
+            document.getElementById('saveBlockBtn').innerText = '+ Masukkan ke Daftar Grid';
+            document.getElementById('cancelEditBtn').classList.add('hidden');
+        }
+
+        function saveBlockItem() {
+            const editId = document.getElementById('editingBlockId').value;
             const type = document.getElementById('blockType').value;
+            const size = document.getElementById('blockSize').value;
+            const icon = document.getElementById('blockIcon').value;
+            const customIconUrl = document.getElementById('blockCustomIconUrl').value.trim();
             const title = document.getElementById('blockTitle').value.trim();
+            const desc = document.getElementById('blockDesc').value.trim();
             const image = document.getElementById('blockImage').value.trim();
+            const thumb = document.getElementById('blockThumb').value.trim();
             const url = document.getElementById('blockUrl').value.trim();
 
-            if (type === 'link' && !url) return alert('URL Link wajib diisi!');
             if (type === 'banner' && !image) return alert('Gambar Banner wajib diisi!');
 
-            appData.blocks.push({ id: Date.now(), type, title: type === 'link' ? (title || url) : '', image: type === 'banner' ? image : '', url });
-            document.getElementById('blockTitle').value = '';
-            document.getElementById('blockImage').value = '';
-            document.getElementById('blockUrl').value = '';
+            const newItem = {
+                id: editId ? Number(editId) : Date.now(),
+                type, size, icon, customIconUrl, title, desc, image, thumb, url
+            };
+
+            if (editId) {
+                const idx = appData.blocks.findIndex(b => b.id === Number(editId));
+                if (idx !== -1) appData.blocks[idx] = newItem;
+            } else {
+                appData.blocks.push(newItem);
+            }
+
+            resetBlockForm();
             renderAdminPanel();
             renderPublicView();
         }
@@ -363,7 +582,7 @@
                 repo: document.getElementById('ghRepo').value.trim(),
                 token: document.getElementById('ghToken').value.trim()
             }));
-            alert('Koneksi disimpan!');
+            alert('Koneksi disimpan di browser ini!');
         }
 
         function loadSavedGitHubConfig() {
@@ -384,28 +603,21 @@
 
         function utf8ToBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
 
-        async function uploadImageToGitHub(fileInput, targetInputId) {
-            uploadMediaGeneric(fileInput, (url) => document.getElementById(targetInputId).value = url);
-        }
-
-        async function uploadBgMediaToGitHub(fileInput) {
-            uploadMediaGeneric(fileInput, (url) => {
-                document.getElementById('inputBgValue').value = url;
-            });
-        }
-
-        async function uploadMediaGeneric(fileInput, callback) {
+        async function uploadMediaGeneric(fileInput, targetInputId) {
             const file = fileInput.files[0];
             if (!file) return;
             const owner = document.getElementById('ghOwner').value.trim();
             const repo = document.getElementById('ghRepo').value.trim();
             const token = document.getElementById('ghToken').value.trim();
             if (!owner || !repo || !token) {
-                alert('Lengkapi konfigurasi GitHub di atas dulu!');
+                alert('Lengkapi Username, Repo, dan Token GitHub di atas dulu!');
                 fileInput.value = '';
                 return;
             }
-            document.getElementById('statusMsg').innerText = 'Mengupload media...';
+
+            const statusEl = document.getElementById('statusMsg');
+            statusEl.innerText = 'Mengupload file ke GitHub...';
+
             const reader = new FileReader();
             reader.onload = async function() {
                 const base64 = reader.result.split(',')[1];
@@ -414,26 +626,74 @@
                 try {
                     const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`, {
                         method: 'PUT',
-                        headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Accept': 'application/vnd.github+json',
+                            'Content-Type': 'application/json'
+                        },
                         body: JSON.stringify({ message: `Upload ${fileName}`, content: base64 })
                     });
-                    if (!res.ok) throw new Error('Gagal upload');
+                    if (!res.ok) throw new Error('Gagal mengupload file ke GitHub');
                     const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/main/${fileName}`;
-                    callback(rawUrl);
-                    document.getElementById('statusMsg').innerText = 'Media berhasil diupload!';
+                    document.getElementById(targetInputId).value = rawUrl;
+                    statusEl.innerText = 'File berhasil diupload! Jangan lupa klik Simpan & Publish.';
                 } catch(err) {
-                    alert('Error: ' + err.message);
-                    document.getElementById('statusMsg').innerText = '';
+                    alert('Error Upload: ' + err.message);
+                    statusEl.innerText = '';
                 }
             };
             reader.readAsDataURL(file);
+        }
+
+        // AUTO-CLEAN: Hapus otomatis semua file di uploads/ yang sudah tidak dipakai di blok mana pun
+        async function cleanupUnusedUploads(owner, repo, token) {
+            const usedUrls = new Set();
+            if (appData.profile.avatar) usedUrls.add(appData.profile.avatar.trim());
+            if (appData.profile.bgValue) usedUrls.add(appData.profile.bgValue.trim());
+
+            appData.blocks.forEach(b => {
+                if (b.image) usedUrls.add(b.image.trim());
+                if (b.thumb) usedUrls.add(b.thumb.trim());
+                if (b.customIconUrl) usedUrls.add(b.customIconUrl.trim());
+            });
+
+            const listUrl = `https://api.github.com/repos/${owner}/${repo}/contents/uploads`;
+            const res = await fetch(listUrl, {
+                headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+            });
+
+            if (!res.ok) return 0;
+
+            const files = await res.json();
+            if (!Array.isArray(files)) return 0;
+
+            let deletedCount = 0;
+            for (const file of files) {
+                const isUsed = Array.from(usedUrls).some(url => url.includes(file.path) || url.includes(file.name));
+                if (!isUsed) {
+                    const delRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${file.path}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Accept': 'application/vnd.github+json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: `Auto-delete file tidak terpakai: ${file.name}`,
+                            sha: file.sha
+                        })
+                    });
+                    if (delRes.ok) deletedCount++;
+                }
+            }
+            return deletedCount;
         }
 
         async function publishToGitHub() {
             const owner = document.getElementById('ghOwner').value.trim();
             const repo = document.getElementById('ghRepo').value.trim();
             const token = document.getElementById('ghToken').value.trim();
-            if (!owner || !repo || !token) return alert('Lengkapi data GitHub!');
+            if (!owner || !repo || !token) return alert('Lengkapi konfigurasi GitHub terlebih dahulu!');
 
             appData.profile.name = document.getElementById('inputName').value.trim();
             appData.profile.bio = document.getElementById('inputBio').value.trim();
@@ -442,8 +702,9 @@
             appData.profile.bgValue = document.getElementById('inputBgValue').value.trim();
 
             const btn = document.getElementById('publishBtn');
+            const statusEl = document.getElementById('statusMsg');
             btn.disabled = true;
-            btn.innerText = 'Menyimpan...';
+            btn.innerText = 'Menyimpan & Membersihkan File Sampah...';
 
             const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/data.json`;
             try {
@@ -454,18 +715,26 @@
                 const putRes = await fetch(apiUrl, {
                     method: 'PUT',
                     headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: 'Update biolink & background', content: utf8ToBase64(JSON.stringify(appData, null, 2)), sha })
+                    body: JSON.stringify({
+                        message: 'Update data biolink dari Admin Panel',
+                        content: utf8ToBase64(JSON.stringify(appData, null, 2)),
+                        sha
+                    })
                 });
-                if (!putRes.ok) throw new Error('Gagal menyimpan file data.json');
+                if (!putRes.ok) throw new Error('Gagal menyimpan data.json');
+
+                const cleanedCount = await cleanupUnusedUploads(owner, repo, token);
 
                 applyBackground();
                 renderPublicView();
-                alert('Berhasil dipublish ke GitHub!');
+                statusEl.innerText = `Berhasil disimpan! (${cleanedCount} file lama tak terpakai dihapus otomatis).`;
+                alert(`Berhasil dipublish ke GitHub!\nFile tidak terpakai yang dihapus otomatis: ${cleanedCount} file.`);
             } catch(err) {
                 alert('Gagal: ' + err.message);
+                statusEl.innerText = 'Error: ' + err.message;
             } finally {
                 btn.disabled = false;
-                btn.innerHTML = '<i class="fas fa-save"></i> SIMPAN & PUBLISH KE GITHUB';
+                btn.innerHTML = '<i class="fas fa-save"></i> SIMPAN & PUBLISH KE GITHUB (AUTO-CLEAN)';
             }
         }
 
