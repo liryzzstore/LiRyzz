@@ -1,10 +1,10 @@
 {
   "profile": {
-    "name": "Vivy Flourite",
-    "bio": "Official Links & Community Channels",
-    "avatar": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&q=80",
-    "bgType": "color",
-    "bgValue": "#0f172a"
+    "name": "LiRyzz",
+    "bio": "Official Links & Community Channels LiRyzz",
+    "avatar": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794476192122.jpg",
+    "bgType": "image",
+    "bgValue": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794476199989.jpg"
   },
   "blocks": [
     {
@@ -13,11 +13,9 @@
       "size": "full",
       "icon": "whatsapp",
       "customIconUrl": "",
-      "title": "No Ryzz Real!",
-      "desc": "Selain ini Fake!",
+      "title": "No Ryzz REAL!",
       "image": "",
-      "thumb": "",
-      "url": "https://wa.me/62895321446723"
+      "url": "https://wa.me/"
     },
     {
       "id": 2,
@@ -26,10 +24,28 @@
       "icon": "tiktok",
       "customIconUrl": "",
       "title": "Tiktok",
-      "desc": "My Tiktok",
       "image": "",
-      "thumb": "",
-      "url": "https://www.tiktok.com/@liryzz_com?_r=1&_t=ZS-9BL7yywsgxV"
+      "url": "https://tiktok.com/"
+    },
+    {
+      "id": 3,
+      "type": "widget",
+      "size": "2x2",
+      "icon": "instagram",
+      "customIconUrl": "",
+      "title": "Instagram",
+      "image": "",
+      "url": "https://instagram.com/"
+    },
+    {
+      "id": 4,
+      "type": "widget",
+      "size": "2x2",
+      "icon": "telegram",
+      "customIconUrl": "",
+      "title": "Telegram",
+      "image": "",
+      "url": "https://t.me/"
     }
   ]
 }
