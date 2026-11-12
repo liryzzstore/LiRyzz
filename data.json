@@ -8,6 +8,18 @@
   },
   "blocks": [
     {
+      "id": 1794476518919,
+      "type": "banner",
+      "size": "3x2",
+      "icon": "auto",
+      "customIconUrl": "",
+      "title": "",
+      "desc": "",
+      "image": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794476510906.jpg",
+      "thumb": "",
+      "url": ""
+    },
+    {
       "id": 1,
       "type": "link",
       "size": "full",
@@ -30,6 +42,30 @@
       "image": "",
       "thumb": "",
       "url": "https://www.tiktok.com/@liryzz_com?_r=1&_t=ZS-9BL7yywsgxV"
+    },
+    {
+      "id": 1794476707589,
+      "type": "widget",
+      "size": "3x2",
+      "icon": "auto",
+      "customIconUrl": "",
+      "title": "Stok Lillith And Ryzz",
+      "desc": "Saluran LiRyzz",
+      "image": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794476700773.jpg",
+      "thumb": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794476671049.jpg",
+      "url": "https://whatsapp.com/channel/0029Vb8MSNRD38CUmkWdJI3v"
+    },
+    {
+      "id": 1794476805665,
+      "type": "widget",
+      "size": "3x2",
+      "icon": "auto",
+      "customIconUrl": "",
+      "title": "Market LiRyzz ⭐✨",
+      "desc": "Grub Jb Allgame LiRyzz",
+      "image": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794476790940.jpg",
+      "thumb": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794476794539.jpg",
+      "url": "https://chat.whatsapp.com/IhelDsFWlJBCtfoImJLT3e?s=cl&p=a&iam=2"
     }
   ]
 }
