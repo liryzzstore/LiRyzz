@@ -1,53 +1,51 @@
 {
   "profile": {
-    "name": "LiRyzz",
-    "bio": "Official Links & Community Channels LiRyzz",
-    "avatar": "https://raw.githubusercontent.com/ryzz-adminjb/LiRyzz/main/uploads/media_1794454421133.jpg",
-    "bgType": "image",
-    "bgValue": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794465165907.jpg"
+    "name": "Vivy Flourite",
+    "bio": "Official Links & Community Channels",
+    "avatar": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&q=80",
+    "bgType": "color",
+    "bgValue": "#0f172a"
   },
   "blocks": [
     {
-      "id": 1794454679172,
-      "type": "banner",
-      "title": "",
-      "image": "https://raw.githubusercontent.com/ryzz-adminjb/LiRyzz/main/uploads/media_1794454640624.jpg",
-      "url": ""
-    },
-    {
-      "id": 1794455063122,
+      "id": 1,
       "type": "link",
+      "size": "full",
+      "icon": "whatsapp",
+      "customIconUrl": "",
       "title": "No Ryzz REAL!",
       "image": "",
-      "url": "https://wa.me/62895321446723"
+      "url": "https://wa.me/"
     },
     {
-      "id": 1794465020792,
+      "id": 2,
       "type": "link",
+      "size": "full",
+      "icon": "tiktok",
+      "customIconUrl": "",
       "title": "Tiktok",
       "image": "",
-      "url": "https://www.tiktok.com/@liryzz_com?_r=1&_t=ZS-9BKub2tsyYQ"
+      "url": "https://tiktok.com/"
     },
     {
-      "id": 1794465086135,
-      "type": "banner",
-      "title": "",
-      "image": "https://raw.githubusercontent.com/liryzzstore/LiRyzz/main/uploads/media_1794465070430.jpg",
-      "url": ""
-    },
-    {
-      "id": 1794465111212,
-      "type": "link",
-      "title": "Saluran",
+      "id": 3,
+      "type": "widget",
+      "size": "2x2",
+      "icon": "instagram",
+      "customIconUrl": "",
+      "title": "Instagram",
       "image": "",
-      "url": "https://whatsapp.com/channel/0029Vb8MSNRD38CUmkWdJI3v"
+      "url": "https://instagram.com/"
     },
     {
-      "id": 1794465132286,
-      "type": "link",
-      "title": "Grub",
+      "id": 4,
+      "type": "widget",
+      "size": "2x2",
+      "icon": "telegram",
+      "customIconUrl": "",
+      "title": "Telegram",
       "image": "",
-      "url": "https://chat.whatsapp.com/IhelDsFWlJBCtfoImJLT3e?s=cl&p=a&iam=2"
+      "url": "https://t.me/"
     }
   ]
 }
