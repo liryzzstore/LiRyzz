@@ -279,13 +279,15 @@
         }
 
         function checkAdminAccess() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('admin')) {
-                document.getElementById('adminView').classList.remove('hidden');
-                document.getElementById('publicView').classList.add('hidden');
-                renderAdminPanel();
-            }
-        }
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAdmin = urlParams.has('admin') || urlParams.get('mode') === 'admin';
+
+    if (isAdmin) {
+        document.getElementById('adminView').classList.remove('hidden');
+        document.getElementById('publicView').classList.add('hidden');
+        renderAdminPanel();
+    }
+}
 
         function applyBackground() {
             const bgContainer = document.getElementById('bgContainer');
